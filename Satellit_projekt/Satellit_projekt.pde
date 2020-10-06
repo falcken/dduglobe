@@ -25,6 +25,8 @@ void setup() {
   int timestamp = position.getInt("timestamp");
   
   
+  
+  
   println(timestamp);
 
   noStroke();
@@ -76,6 +78,8 @@ void draw() {
  float angleb = PVector.angleBetween(xaxis, pos);
  PVector raxis = xaxis.cross(pos);
 */
+
+  altPixels = map(alt, 0, 1000, 0, 32);
 
   pushMatrix();
   //translate(x, y, z);
