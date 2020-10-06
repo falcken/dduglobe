@@ -1,4 +1,4 @@
-PVector convert(float lat, float lon) {
+PVector convert(float lat, float lon, float r) {
  float theta = radians(lat);
 
  float phi = radians(lon) + PI;

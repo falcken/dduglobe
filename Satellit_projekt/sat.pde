@@ -1,7 +1,8 @@
-class Sat extends Thread {
+class Sat {
   int id;
   float d, x, y, z, x2, y2, z2, velocity;
-  float lat, lon, alt, lat2, lon2, alt2, angleb, angleb2;
+  float lat, lon, alt, lat2, lon2, alt2, angleb, angleb2, angle, speed;
+  PVector pos, pos2;
   JSONObject satellit1;
   JSONObject satellit2;
 
@@ -36,27 +37,36 @@ class Sat extends Thread {
   }
 
   void update() {
-
   }
 
   void display() {
+    angleb2 = angleb2 + speed*frameCount/30;
+    println(angleb2);
     pushMatrix();
-    translate(x, y, z);
-    rotate(angleb, naxis.x, naxis.y, naxis.z);
+    rotate(angleb2+speed, naxis.x, naxis.y, naxis.z);
+    translate(pos.x, pos.y, pos.z);
+    rotate(angleb, raxis.x, raxis.y, raxis.z);
     fill(255);
     box(5, 5, 5);
     popMatrix();
   }
 
-  void calcPath(){
-    PVector pos = convert(lat, lon);
-    PVector pos2 = convert(lat2, lon2);
+  void calcPath() {
+    float h1 = map(alt, 0, 1000, 0, 32);
+    float h2 = map(alt2, 0, 1000, 0, 32);
     
+    pos = convert(lat, lon, h1+200);
+    //println(h1, h2);
+    pos2 = convert(lat2, lon2, h2+200);
+    
+    speed = (sqrt(sq(pos2.x-pos.x)+sq(pos2.y-pos.y)+sq(pos2.z-pos.z)));
+    //println(speed);
 
     PVector xaxis = new PVector(1, 0, 0);
     angleb = PVector.angleBetween(xaxis, pos);
     raxis = xaxis.cross(pos);
-    
-    PVector naxis = pos.cross(pos2);
+
+    naxis = pos.cross(pos2);
+    angleb2 = PVector.angleBetween(pos, pos2);
   }
 }
