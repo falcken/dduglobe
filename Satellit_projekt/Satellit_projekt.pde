@@ -4,6 +4,7 @@
 // https://youtu.be/dbs4IYGfAXc
 // https://editor.p5js.org/codingtrain/sketches/tttPKxZi
 
+float lon, lat, alt;
 float angle;
 
 JSONObject satellit;
@@ -22,10 +23,11 @@ void setup() {
   JSONArray positions = satellit.getJSONArray("positions");
   JSONObject position = positions.getJSONObject(0);
   
-  int timestamp = position.getInt("timestamp");
+  lon = position.getFloat("satlongitude");
+  lat = position.getFloat("satlatitude");
+  alt = position.getFloat("sataltitude");
   
-  
-  println(timestamp);
+  //println(timestamp);
 
   noStroke();
   globe = createShape(SPHERE, r);
@@ -44,10 +46,6 @@ void draw() {
   //sphere(r);
   shape(globe);
   
-  
- /*float lat = row.getFloat("latitude");
- float lon = row.getFloat("longitude");
- float mag = row.getFloat("mag");
  
  // original version
  // float theta = radians(lat) + PI/2;
@@ -57,6 +55,8 @@ void draw() {
  
  float phi = radians(lon) + PI;
  
+ float h = map(alt, 0, 1000, 0, 32);
+ 
  // original version
  // float x = r * sin(theta) * cos(phi);
  // float y = -r * sin(theta) * sin(phi);
@@ -65,23 +65,19 @@ void draw() {
  // fix: in OpenGL, y & z axes are flipped from math notation of spherical coordinates
  float x = r * cos(theta) * cos(phi);
  float y = -r * sin(theta);
- float z = -r * cos(theta) * sin(phi);
+ float z = -r * cos(theta) * sin(phi) + h;
  
  PVector pos = new PVector(x, y, z);
  
- float h = pow(10, mag);
- float maxh = pow(10, 7);
- h = map(h, 0, maxh, 10, 100);
  PVector xaxis = new PVector(1, 0, 0);
  float angleb = PVector.angleBetween(xaxis, pos);
  PVector raxis = xaxis.cross(pos);
-*/
 
   pushMatrix();
-  //translate(x, y, z);
-  //rotate(angleb, raxis.x, raxis.y, raxis.z);
+  translate(x, y, z);
+  rotate(angleb, raxis.x, raxis.y, raxis.z);
   fill(255);
-  //box(h, 5, 5);
+  box(5, 5, 5);
   popMatrix();
   
   //println(satellit);
