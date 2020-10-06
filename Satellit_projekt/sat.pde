@@ -33,7 +33,7 @@ class Sat {
     lat2 = position2.getFloat("satlatitude");
     alt2 = position2.getFloat("sataltitude");
 
-    println("Lon1 og lon2: "+lon, lon2);
+    //println("Lon1 og lon2: "+lon, lon2);
   }
 
   void update() {
@@ -41,7 +41,7 @@ class Sat {
 
   void display() {
     angleb2 = angleb2 + speed*frameCount/30;
-    println(angleb2);
+    //println(angleb2);
     pushMatrix();
     rotate(angleb2+speed, naxis.x, naxis.y, naxis.z);
     translate(pos.x, pos.y, pos.z);
