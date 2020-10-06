@@ -5,7 +5,7 @@ class Sat extends Thread {
   JSONObject satellit1;
   JSONObject satellit2;
 
-  PVector raxis, raxis2;
+  PVector raxis, raxis2, naxis;
 
   Sat(int identifier) {
     id = identifier;
@@ -42,44 +42,21 @@ class Sat extends Thread {
   void display() {
     pushMatrix();
     translate(x, y, z);
-    rotate(angleb, raxis.x, raxis.y, raxis.z);
+    rotate(angleb, naxis.x, naxis.y, naxis.z);
     fill(255);
     box(5, 5, 5);
     popMatrix();
   }
 
-  void calcCoor(){
-    float theta = radians(lat);
-    float phi = radians(lon) + PI;
-    float h = map(alt, 0, 1000, 0, 32);
-
-    float theta2 = radians(lat2);
-    float phi2 = radians(lon2) + PI;
-    float h2 = map(alt2, 0, 1000, 0, 32);
-
-    // original version
-    // float x = r * sin(theta) * cos(phi);
-    // float y = -r * sin(theta) * sin(phi);
-    // float z = r * cos(theta);
-
-    // fix: in OpenGL, y & z axes are flipped from math notation of spherical coordinates
-    x = r * cos(theta) * cos(phi);
-    y = -r * sin(theta);
-    z = -r * cos(theta) * sin(phi) - h;
-
-    x2 = r * cos(theta2) * cos(phi2);
-    y2 = -r * sin(theta2);
-    z2 = -r * cos(theta2) * sin(phi2) - h2;
-
-    PVector pos = new PVector(x, y, z);
-    PVector pos2 = new PVector(x2, y2, z2);
+  void calcPath(){
+    PVector pos = convert(lat, lon);
+    PVector pos2 = convert(lat2, lon2);
+    
 
     PVector xaxis = new PVector(1, 0, 0);
     angleb = PVector.angleBetween(xaxis, pos);
     raxis = xaxis.cross(pos);
-
-    PVector xaxis2 = new PVector(1, 0, 0);
-    angleb2 = PVector.angleBetween(xaxis2, pos2);
-    raxis2 = xaxis2.cross(pos2);
+    
+    PVector naxis = pos.cross(pos2);
   }
 }
