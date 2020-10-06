@@ -1,6 +1,7 @@
 class Sat {
   int id;
   float lat, lon, alt;
+  float d;
   
   Sat(int identifier) {
     id = identifier;
@@ -23,6 +24,10 @@ class Sat {
   }
   
   void display() {
+    
+  }
+  
+  void calcVel(){
     
   }
 }
