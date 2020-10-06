@@ -65,15 +65,13 @@ void draw() {
  // fix: in OpenGL, y & z axes are flipped from math notation of spherical coordinates
  float x = r * cos(theta) * cos(phi);
  float y = -r * sin(theta);
- float z = -r * cos(theta) * sin(phi) + h;
+ float z = -r * cos(theta) * sin(phi) - h;
 
  PVector pos = new PVector(x, y, z);
 
  PVector xaxis = new PVector(1, 0, 0);
  float angleb = PVector.angleBetween(xaxis, pos);
  PVector raxis = xaxis.cross(pos);
-
-  altPixels = map(alt, 0, 1000, 0, 32);
 
   pushMatrix();
   translate(x, y, z);
