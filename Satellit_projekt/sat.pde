@@ -1,4 +1,4 @@
-class Sat {
+class Sat extends Thread {
   int id;
   float lat, lon, alt, lat2, lon2, alt2;
   JSONObject satellit1;
@@ -7,10 +7,6 @@ class Sat {
   
   Sat(int identifier) {
     id = identifier;
-  }
-  
-  void async() {
-    thread("getPos");
   }
   
   void getPos() {
@@ -38,6 +34,11 @@ class Sat {
   }
   
   void display() {
-    
+    pushMatrix();
+    translate(x, y, z);
+    rotate(angleb, raxis.x, raxis.y, raxis.z);
+    fill(255);
+    box(5, 5, 5);
+    popMatrix();
   }
 }

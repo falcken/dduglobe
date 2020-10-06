@@ -43,11 +43,9 @@ void setup() {
 
 void draw() {
   if (frameCount % 150 == 0) {
-    for(int i = 0; i < sats.size(); i++) {
-      Sat s = sats.get(i);
-      s.async();
-    }
+    thread("updateSats");
   }
+  
   background(51);
   translate(width*0.5, height*0.5);
   rotateY(angle);
@@ -59,39 +57,12 @@ void draw() {
   //sphere(r);
   shape(globe);
 
-
- // original version
- // float theta = radians(lat) + PI/2;
-
- // fix: no + PI/2 needed, since latitude is between -180 and 180 deg
- float theta = radians(sats.get(0).lat);
-
- float phi = radians(sats.get(0).lon) + PI;
-
- float h = map(sats.get(0).alt, 0, 1000, 0, 32);
-
- // original version
- // float x = r * sin(theta) * cos(phi);
- // float y = -r * sin(theta) * sin(phi);
- // float z = r * cos(theta);
-
- // fix: in OpenGL, y & z axes are flipped from math notation of spherical coordinates
- float x = r * cos(theta) * cos(phi);
- float y = -r * sin(theta);
- float z = -r * cos(theta) * sin(phi) - h;
-
- PVector pos = new PVector(x, y, z);
-
- PVector xaxis = new PVector(1, 0, 0);
- float angleb = PVector.angleBetween(xaxis, pos);
- PVector raxis = xaxis.cross(pos);
-
-  pushMatrix();
-  translate(x, y, z);
-  rotate(angleb, raxis.x, raxis.y, raxis.z);
-  fill(255);
-  box(5, 5, 5);
-  popMatrix();
-
   //println(satellit);
+}
+
+void updateSats() {
+  for(int i = 0; i < sats.size(); i++) {
+    Sat s = sats.get(i);
+    s.getPos();
+  }
 }
