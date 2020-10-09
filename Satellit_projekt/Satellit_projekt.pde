@@ -94,6 +94,8 @@ void checkSatClick() {
     
     if (s.realX < mouseX && s.realX+20 > mouseX && s.realY < mouseY && s.realY+20 > mouseY) {
       s.showInfo();
+      stroke(1);
+      rect(s.realX + 20, s.realY + 20, 30, 30);
     }
       
     //if (red(get(mouseX, mouseY))+25 > red(s.c) && red(get(mouseX, mouseY))-25 < red(s.c)) {

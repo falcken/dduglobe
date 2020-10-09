@@ -1,10 +1,12 @@
 class Sat {
-  int id;
+  int id, satid;
   float d, x, y, z, x2, y2, z2, velocity;
   float lat, lon, alt, lat2, lon2, alt2, angleb, angleb2, angle, speed, buffer, realX, realY;
   PVector pos, pos2;
   JSONObject satellit1;
   JSONObject satellit2;
+  
+  String satname;
 
   PVector raxis, raxis2, naxis;
   
@@ -26,11 +28,16 @@ class Sat {
     satellit1 = loadJSONObject("https://www.n2yo.com/rest/v1/satellite/positions/"+id+"/41.702/-71.014/0/2/&apiKey=KLH6Z6-VB9X47-UQLZJK-4KGO");
 
     JSONArray positions = satellit1.getJSONArray("positions");
+    JSONObject info = satellit1.getJSONObject("info");
     JSONObject position = positions.getJSONObject(0);
 
     lon = position.getFloat("satlongitude");
     lat = position.getFloat("satlatitude");
     alt = position.getFloat("sataltitude");
+    satid = info.getInt("satid");
+    satname = info.getString("satname");
+    
+    println(satid, satname);
 
     JSONObject position2 = positions.getJSONObject(1);
 
