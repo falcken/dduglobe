@@ -16,8 +16,8 @@ class Sat {
   Sat(int identifier) {
     id = identifier;
 
-    //c = color(random(0.0, 255.0), random(0,255), random(0,255));
-    c = color(250, 255, 61);
+    c = color(random(100, 255.0), random(100,255), random(100,255));
+    //c = color(250, 255, 61);
   }
 
   void async() {
@@ -102,7 +102,13 @@ class Sat {
 
   void displayInfo() {
     if (showingInfo) {
-      rect(0, height-80, 200, height);
+      rect(0, height-80, 150, height);
+      fill(0);
+      text(satid, 10, height-65);
+      text(satname, 10, height-50);
+      text("Latitude: "+lat, 10, height-35);
+      text("Longtitude: "+lon, 10, height-20);
+      text("Altitude: "+alt, 10, height-5);
     }
   }
 }
