@@ -2,17 +2,18 @@ class Sat {
   int id;
   float d, x, y, z, x2, y2, z2, velocity;
   float lat, lon, alt, lat2, lon2, alt2, angleb, angleb2, angle, speed, buffer, realX, realY;
+  boolean showingInfo;
   PVector pos, pos2;
   JSONObject satellit1;
   JSONObject satellit2;
 
   PVector raxis, raxis2, naxis;
-  
+
   color c;
 
   Sat(int identifier) {
     id = identifier;
-    
+
     //c = color(random(0.0, 255.0), random(0,255), random(0,255));
     c = color(250, 255, 61);
   }
@@ -56,8 +57,8 @@ class Sat {
     rotate(angleb, raxis.x, raxis.y, raxis.z); // align
     box.setFill(c);
     buffer = angleb2;
-    realX = screenX(0,0);
-    realY = screenY(0,0);
+    realX = screenX(0, 0);
+    realY = screenY(0, 0);
     shape(box);
     popMatrix();
   }
@@ -65,11 +66,11 @@ class Sat {
   void calcPath() {
     float h1 = map(alt, 0, 1000, 0, 32);
     float h2 = map(alt2, 0, 1000, 0, 32);
-    
+
     pos = convert(lat, lon, h1+200);
     //println(h1, h2);
     pos2 = convert(lat2, lon2, h2+200);
-    
+
     speed = (sqrt(sq(pos2.x-pos.x)+sq(pos2.y-pos.y)+sq(pos2.z-pos.z)));
     //speed = PVector.angleBetween(pos, pos2);
     //println(speed);
@@ -81,8 +82,20 @@ class Sat {
     naxis = pos.cross(pos2);
     angleb2 = PVector.angleBetween(pos, pos2);
   }
-  
+
   void showInfo() {
-    println("YO MAMA");
+    if (!showingInfo) {
+      println("1");
+      showingInfo = true;
+    } else {
+      println("2");
+      showingInfo = false;
+    }
+  }
+
+  void displayInfo() {
+    if (showingInfo) {
+      rect(0, height-80, 200, height);
+    }
   }
 }

@@ -33,8 +33,13 @@ void setup() {
 }
 
 void draw() {
+  background(51);
   if (frameCount % 150 == 0) {
     thread("updateSats");
+  }
+  for (int i = 0; i < sats.size(); i++) {
+    Sat s = sats.get(i);
+    s.displayInfo();
   }
 
   if (mousePressed) {
@@ -44,11 +49,10 @@ void draw() {
     //ryy = map(ry, 0, height, -PI, PI);
     rxx = rxx + rx / 100.0;
     ryy = ryy + ry / -100.0;
-    println(rxx,ryy,mouseX, pmouseX);
+    println(rxx, ryy, mouseX, pmouseX);
   }
-  
-  
-  background(51);
+
+
   translate(width*0.5, height*0.5);
   //rotateY(rxx);
   //angle += 0.01;
@@ -60,18 +64,19 @@ void draw() {
   //sphere(r);
   //globe.rotateX(ryy);
   //globe.rotateY(rxx);
+  pushMatrix();
   rotateY(rxx);
   rotateX(ryy);
   shape(globe);
- 
-    
+
+
   for (int i = 0; i < sats.size(); i++) {
     Sat s = sats.get(i);
     s.calcPath();
     s.display();
   }
+  popMatrix();
   //println(satellit);
-  
 }
 
 void updateSats() {
@@ -81,21 +86,22 @@ void updateSats() {
   }
 }
 
-void mouseClicked(){
+void mouseClicked() {
   checkSatClick();
 }
 
 void checkSatClick() {
   println("detected click");
-  for(int i = 0; i < sats.size(); i++) {
+  for (int i = 0; i < sats.size(); i++) {
     Sat s = sats.get(i);
     //println(modelX(s.pos.x, s.pos.y, s.pos.z), mouseX);
     //println(green(get(mouseX, mouseY)), green(s.c));
-    
+
     if (s.realX < mouseX && s.realX+20 > mouseX && s.realY < mouseY && s.realY+20 > mouseY) {
+      println("CLICKED: "+i);
       s.showInfo();
     }
-      
+
     //if (red(get(mouseX, mouseY))+25 > red(s.c) && red(get(mouseX, mouseY))-25 < red(s.c)) {
     //  println("CLICKED: "+i);
     //}
