@@ -89,10 +89,15 @@ void checkSatClick() {
   println("detected click");
   for(int i = 0; i < sats.size(); i++) {
     Sat s = sats.get(i);
-      println(green(get(mouseX, mouseY)), green(s.c));
+    //println(modelX(s.pos.x, s.pos.y, s.pos.z), mouseX);
+    //println(green(get(mouseX, mouseY)), green(s.c));
     
-    if (red(get(mouseX, mouseY))+25 > red(s.c) && red(get(mouseX, mouseY))-25 < red(s.c)) {
-      println("CLICKED: "+i);
+    if (s.realX < mouseX && s.realX+20 > mouseX && s.realY < mouseY && s.realY+20 > mouseY) {
+      s.showInfo();
     }
+      
+    //if (red(get(mouseX, mouseY))+25 > red(s.c) && red(get(mouseX, mouseY))-25 < red(s.c)) {
+    //  println("CLICKED: "+i);
+    //}
   }
 }

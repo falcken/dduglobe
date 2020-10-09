@@ -1,7 +1,7 @@
 class Sat {
   int id;
   float d, x, y, z, x2, y2, z2, velocity;
-  float lat, lon, alt, lat2, lon2, alt2, angleb, angleb2, angle, speed, buffer;
+  float lat, lon, alt, lat2, lon2, alt2, angleb, angleb2, angle, speed, buffer, realX, realY;
   PVector pos, pos2;
   JSONObject satellit1;
   JSONObject satellit2;
@@ -56,6 +56,8 @@ class Sat {
     rotate(angleb, raxis.x, raxis.y, raxis.z); // align
     box.setFill(c);
     buffer = angleb2;
+    realX = screenX(0,0);
+    realY = screenY(0,0);
     shape(box);
     popMatrix();
   }
@@ -78,5 +80,9 @@ class Sat {
 
     naxis = pos.cross(pos2);
     angleb2 = PVector.angleBetween(pos, pos2);
+  }
+  
+  void showInfo() {
+    println("YO MAMA");
   }
 }
