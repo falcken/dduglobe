@@ -10,6 +10,8 @@ float easing = 0.05;
 PImage earth;
 PShape globe, box;
 
+boolean clicked = false;
+
 void setup() {
   size(600, 600, P3D);
   smooth();
@@ -58,7 +60,7 @@ void draw() {
   //sphere(r);
   //globe.rotateX(ryy);
   //globe.rotateY(rxx);
-    rotateY(rxx);
+  rotateY(rxx);
   rotateX(ryy);
   shape(globe);
  
@@ -69,11 +71,28 @@ void draw() {
     s.display();
   }
   //println(satellit);
+  
 }
 
 void updateSats() {
   for (int i = 0; i < sats.size(); i++) {
     Sat s = sats.get(i);
     s.getPos();
+  }
+}
+
+void mouseClicked(){
+  checkSatClick();
+}
+
+void checkSatClick() {
+  println("detected click");
+  for(int i = 0; i < sats.size(); i++) {
+    Sat s = sats.get(i);
+      println(green(get(mouseX, mouseY)), green(s.c));
+    
+    if (red(get(mouseX, mouseY))+25 > red(s.c) && red(get(mouseX, mouseY))-25 < red(s.c)) {
+      println("CLICKED: "+i);
+    }
   }
 }

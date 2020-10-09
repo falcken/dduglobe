@@ -7,9 +7,14 @@ class Sat {
   JSONObject satellit2;
 
   PVector raxis, raxis2, naxis;
+  
+  color c;
 
   Sat(int identifier) {
     id = identifier;
+    
+    //c = color(random(0.0, 255.0), random(0,255), random(0,255));
+    c = color(250, 255, 61);
   }
 
   void async() {
@@ -42,14 +47,14 @@ class Sat {
   void display() {
     //float buffer = angleb2;
     buffer += angleb2 + speed;
-    println(buffer);
-    buffer = angleb2+speed* frameCount/60;
+    //println(buffer);
+    buffer = angleb2+speed;
     //println(angleb2);
     pushMatrix();
     rotate(buffer, naxis.x, naxis.y, naxis.z); // roter om klode
     translate(pos.x, pos.y, pos.z);
     rotate(angleb, raxis.x, raxis.y, raxis.z); // align
-    fill(255);
+    box.setFill(c);
     buffer = angleb2;
     shape(box);
     popMatrix();
