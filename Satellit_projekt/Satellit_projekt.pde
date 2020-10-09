@@ -15,7 +15,7 @@ void setup() {
   smooth();
   earth = loadImage("earth.jpg");
   sats.add(new Sat(25544));
-  sats.add(new Sat(28300));
+  //sats.add(new Sat(28300));
 
   for (int i = 0; i < sats.size(); i++) {
     Sat s = sats.get(i);
