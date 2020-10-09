@@ -35,9 +35,20 @@ void draw() {
     thread("updateSats");
   }
 
+  if (mousePressed) {
+    rx = (mouseX - pmouseX);
+    ry = (mouseY - pmouseY);
+    //rxx = map(rx, 0, width, -PI, PI);
+    //ryy = map(ry, 0, height, -PI, PI);
+    rxx = rxx + rx / 100.0;
+    ryy = ryy + ry / -100.0;
+    println(rxx,ryy,mouseX, pmouseX);
+  }
+  
+  
   background(51);
   translate(width*0.5, height*0.5);
-  rotateY(rotangle);
+  //rotateY(rxx);
   //angle += 0.01;
 
 
@@ -45,19 +56,13 @@ void draw() {
   fill(200);
   noStroke();
   //sphere(r);
-  globe.rotateX(ryy);
-  globe.rotateY(rxx);
+  //globe.rotateX(ryy);
+  //globe.rotateY(rxx);
+    rotateY(rxx);
+  rotateX(ryy);
   shape(globe);
-
-  
-  if (mousePressed) {
-    rx = (mouseX - pmouseX);
-    ry = (mouseY - pmouseY);
-    rxx = rx / 1000.0;
-    ryy = ry / -1000.0;
-    println(rxx,ryy,mouseX, pmouseX);
-  }
-  
+ 
+    
   for (int i = 0; i < sats.size(); i++) {
     Sat s = sats.get(i);
     s.calcPath();
