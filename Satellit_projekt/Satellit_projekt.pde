@@ -1,6 +1,8 @@
 ArrayList<Sat> sats = new ArrayList<Sat>();
 float angle = 0;
 
+int[] satList = {25544, 28300, 39509, 27818, 27436, 20103, 46380, 46142};
+
 float r = 200, rxx, ryy;
 int rx, ry;
 float rotangle = 0;
@@ -8,7 +10,7 @@ float targetAngle = 0;
 float easing = 0.05;
 
 PImage earth;
-PShape globe, box;
+PShape globe, box, bigBox;
 
 boolean clicked = false;
 
@@ -16,8 +18,10 @@ void setup() {
   size(600, 600, P3D);
   smooth();
   earth = loadImage("earth.jpg");
-  sats.add(new Sat(25544));
-  //sats.add(new Sat(28300));
+
+  for (int i = 0; i < satList.length; i++) {
+    sats.add(new Sat(satList[i]));
+  }
 
   for (int i = 0; i < sats.size(); i++) {
     Sat s = sats.get(i);
@@ -28,6 +32,7 @@ void setup() {
 
   noStroke();
   box = createShape(BOX, 5, 5, 5);
+  bigBox = createShape(BOX, 10, 10, 10);
   globe = createShape(SPHERE, r);
   globe.setTexture(earth);
 }
@@ -99,9 +104,15 @@ void checkSatClick() {
 
     if (s.realX < mouseX+20 && s.realX+20 > mouseX && s.realY < mouseY+20 && s.realY+20 > mouseY) {
       println("CLICKED: "+i);
+      for (int u = 0; u < sats.size(); u++) {
+        Sat ss = sats.get(u);
+        if (ss.showingInfo && u != i) {
+          ss.showInfo();
+        }
+      }
       s.showInfo();
       stroke(1);
-      rect(s.realX + 20, s.realY + 20, 30, 30);
+      //rect(s.realX + 20, s.realY + 20, 30, 30);
     }
 
     //if (red(get(mouseX, mouseY))+25 > red(s.c) && red(get(mouseX, mouseY))-25 < red(s.c)) {

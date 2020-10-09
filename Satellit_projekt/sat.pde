@@ -66,7 +66,11 @@ class Sat {
     buffer = angleb2;
     realX = screenX(0, 0);
     realY = screenY(0, 0);
-    shape(box);
+    if (!showingInfo) {
+      shape(box);
+    } else {
+      shape(bigBox);
+    }
     popMatrix();
   }
 
