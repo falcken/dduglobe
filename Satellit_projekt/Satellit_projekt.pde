@@ -8,7 +8,7 @@ float targetAngle = 0;
 float easing = 0.05;
 
 PImage earth;
-PShape globe;
+PShape globe, box;
 
 void setup() {
   size(600, 600, P3D);
@@ -25,6 +25,7 @@ void setup() {
   //println(timestamp);
 
   noStroke();
+  box = createShape(BOX, 5, 5, 5);
   globe = createShape(SPHERE, r);
   globe.setTexture(earth);
 }

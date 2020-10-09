@@ -47,7 +47,8 @@ class Sat {
     translate(pos.x, pos.y, pos.z);
     rotate(angleb, raxis.x, raxis.y, raxis.z);
     fill(255);
-    box(5, 5, 5);
+    
+    shape(box);
     popMatrix();
   }
 
