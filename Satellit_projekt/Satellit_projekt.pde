@@ -97,7 +97,7 @@ void checkSatClick() {
     //println(modelX(s.pos.x, s.pos.y, s.pos.z), mouseX);
     //println(green(get(mouseX, mouseY)), green(s.c));
 
-    if (s.realX < mouseX && s.realX+20 > mouseX && s.realY < mouseY && s.realY+20 > mouseY) {
+    if (s.realX < mouseX+20 && s.realX+20 > mouseX && s.realY < mouseY+20 && s.realY+20 > mouseY) {
       println("CLICKED: "+i);
       s.showInfo();
       stroke(1);
