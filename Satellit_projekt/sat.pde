@@ -26,7 +26,7 @@ class Sat {
 
   void getPos() {
     satellit1 = new JSONObject();
-    satellit1 = loadJSONObject("https://www.n2yo.com/rest/v1/satellite/positions/"+id+"/41.702/-71.014/0/2/&apiKey=KLH6Z6-VB9X47-UQLZJK-4KGO");
+    satellit1 = loadJSONObject("https://api.n2yo.com/rest/v1/satellite/positions/"+id+"/41.702/-71.014/0/2/&apiKey=KLH6Z6-VB9X47-UQLZJK-4KGO");
 
     JSONArray positions = satellit1.getJSONArray("positions");
     JSONObject info = satellit1.getJSONObject("info");
